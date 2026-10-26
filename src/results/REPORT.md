@@ -4,24 +4,24 @@
 
 | Item | Value |
 |---|---|
-| captured_at_utc | 2026-10-01T05:31:35Z |
-| host_os | Kali GNU/Linux Rolling |
-| kernel | 7.1.5+kali-amd64 |
-| cpu_model | AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx |
+| captured_at_utc | 2026-10-25T20:24:48Z |
+| host_os | Debian GNU/Linux 12 (bookworm) |
+| kernel | 6.17.13+2-amd64 |
+| cpu_model | Intel(R) Xeon(R) E-2314 CPU @ 2.80GHz |
 | cpu_count | 4 |
-| memory_total | 7.8Gi |
+| memory_total | 15Gi |
 | cpu_governor | n/a |
 | turbo_disabled_or_boost | n/a |
-| docker | 28.5.2+dfsg4 |
-| docker_compose | 2.40.3-3 |
+| docker | 29.9.2 |
+| docker_compose | 5.6.1 |
 | cpuset_auth | 0 |
 | cpuset_resolver | 1 |
 | cpuset_client_and_bench | 2 / 3 |
 | powerdns_auth | PowerDNS Authoritative Server 5.0.7 (C) PowerDNS.COM BV |
 | powerdns_recursor | PowerDNS Recursor 5.3.10 (C) PowerDNS.COM BV |
 | pqc_stack | liboqs 0.16.0 liboqs-python 0.16.0.1 dnspython 2.7.0 pycryptodome 3.23.0 cryptography 46.0.6 |
-| images | pqcmtl/tools:latest=f66b5a1fde59 pqcmtl/pdns-recursor:rec-53=39529d4c0212 pqcmtl/pdns-auth:auth-50=72a11f3238fb  |
-| testbed_git_commit | 4601848 |
+| images | pqcmtl/ui:latest=ee3ac41abcfb pqcmtl/tools:latest=48c6986b490f pqcmtl/pdns-recursor:rec-53=8807608c5a50 pqcmtl/pdns-auth:auth-50=2aa2ac430bad  |
+| testbed_git_commit | n/a |
 
 ## 2. Benchmark configuration and workload parameters
 
@@ -42,16 +42,16 @@
 
 ### 3.1 Signing and verification (offline, pinned CPU)
 
-Pinned CPUs: `[3]`. Primitive costs (mean of 500): ML-DSA-44 sign 193.7 µs, verify 66.5 µs; ECDSA P-256 sign 59.5 µs, verify 151.5 µs; MTL cSHAKE128 node hash 18.30 µs.
+Pinned CPUs: `[3]`. Primitive costs (mean of 500): ML-DSA-44 sign 50.4 µs, verify 20.7 µs; ECDSA P-256 sign 34.9 µs, verify 86.5 µs; MTL cSHAKE128 node hash 8.12 µs.
 
 | Dataset | Mode | RRsets | Zone sign ms (mean±sd) | Cold verify-all ms (mean±sd) | ML-DSA signs | ML-DSA verifies | Mean RRSIG sig bytes | Total RRSIG sig bytes |
 |---|---|---|---|---|---|---|---|---|
-| small | ML-DSA-44 | 211 | 61.8 ± 1.3 | 21.5 ± 0.3 | 211 | 211 | 2420.0 | 510620 |
-| small | MTL + ML-DSA-44 | 213 | 54.9 ± 11.6 | 44.2 ± 0.3 | 1 | 1 | 190.9 | 40653 |
-| medium | ML-DSA-44 | 2011 | 597.0 ± 32.4 | 203.6 ± 5.9 | 2011 | 2011 | 2420.0 | 4866620 |
-| medium | MTL + ML-DSA-44 | 2013 | 450.1 ± 24.1 | 491.1 ± 19.3 | 1 | 1 | 223.6 | 450101 |
-| large | ML-DSA-44 | 20011 | 6028.2 ± 165.0 | 2045.4 ± 79.1 | 20011 | 20011 | 2420.0 | 48426620 |
-| large | MTL + ML-DSA-44 | 20013 | 4871.2 ± 434.6 | 6766.7 ± 305.9 | 1 | 1 | 290.6 | 5814821 |
+| small | ML-DSA-44 | 211 | 23.4 ± 1.1 | 7.3 ± 0.2 | 211 | 211 | 2420.0 | 510620 |
+| small | MTL + ML-DSA-44 | 213 | 24.5 ± 0.5 | 21.4 ± 1.2 | 1 | 1 | 190.9 | 40653 |
+| medium | ML-DSA-44 | 2011 | 224.0 ± 4.0 | 70.4 ± 1.2 | 2011 | 2011 | 2420.0 | 4866620 |
+| medium | MTL + ML-DSA-44 | 2013 | 238.2 ± 8.4 | 244.0 ± 1.2 | 1 | 1 | 223.6 | 450101 |
+| large | ML-DSA-44 | 20011 | 2251.3 ± 20.8 | 724.4 ± 12.1 | 20011 | 20011 | 2420.0 | 48426620 |
+| large | MTL + ML-DSA-44 | 20013 | 2503.6 ± 23.6 | 3235.4 ± 18.7 | 1 | 1 | 290.6 | 5814821 |
 
 ![Zone signing time](figures/sign_time.png)
 
@@ -65,15 +65,15 @@ Pinned CPUs: `[3]`. Primitive costs (mean of 500): ML-DSA-44 sign 193.7 µs, ver
 
 | Dataset | Mode | Queries/trial x trials | Bytes received / trial (mean±sd) | Mean answer bytes | Answer TCP rate | TCP fallbacks / trial | Ladder fetches / trial | p50 latency ms | Crypto ms / trial | Failures |
 |---|---|---|---|---|---|---|---|---|---|---|
-| large | ML-DSA-44 | 300 x 5 | 761.7 ± 0.0 KiB | 2521 | 1.00 | 305.0 | 0.0 | 5.93 | 46.8 | 0 |
-| medium | ML-DSA-44 | 300 x 5 | 761.7 ± 0.0 KiB | 2521 | 1.00 | 305.0 | 0.0 | 5.21 | 41.5 | 0 |
-| small | ML-DSA-44 | 300 x 5 | 761.7 ± 0.0 KiB | 2521 | 1.00 | 305.0 | 0.0 | 3.91 | 41.5 | 0 |
-| large | MTL + ML-DSA-44 | 300 x 5 | 128.0 ± 0.3 KiB | 391 | 0.00 | 3.0 | 3.0 | 3.74 | 124.0 | 0 |
-| large | MTL + ML-DSA-44 (no ladder cache) | 300 x 5 | 1006.3 ± 0.3 KiB | 391 | 0.00 | 3.0 | 302.0 | 6.34 | 184.7 | 0 |
-| medium | MTL + ML-DSA-44 | 300 x 5 | 108.3 ± 0.4 KiB | 323 | 0.00 | 3.0 | 3.0 | 3.48 | 93.2 | 0 |
-| medium | MTL + ML-DSA-44 (no ladder cache) | 300 x 5 | 995.6 ± 0.4 KiB | 323 | 0.00 | 3.0 | 302.0 | 5.72 | 143.3 | 0 |
-| small | MTL + ML-DSA-44 | 300 x 5 | 95.9 ± 0.3 KiB | 281 | 0.00 | 3.0 | 3.0 | 2.46 | 70.4 | 0 |
-| small | MTL + ML-DSA-44 (no ladder cache) | 300 x 5 | 945.5 ± 0.3 KiB | 281 | 0.00 | 3.0 | 302.0 | 5.02 | 123.6 | 0 |
+| large | ML-DSA-44 | 300 x 5 | 765.2 ± 0.0 KiB | 2529 | 1.00 | 305.0 | 0.0 | 1.48 | 10.9 | 0 |
+| medium | ML-DSA-44 | 300 x 5 | 765.2 ± 0.0 KiB | 2529 | 1.00 | 305.0 | 0.0 | 1.36 | 10.6 | 0 |
+| small | ML-DSA-44 | 300 x 5 | 765.2 ± 0.0 KiB | 2529 | 1.00 | 305.0 | 0.0 | 0.99 | 9.8 | 0 |
+| large | MTL + ML-DSA-44 | 300 x 5 | 130.4 ± 0.3 KiB | 399 | 0.00 | 3.0 | 3.0 | 1.16 | 47.9 | 0 |
+| large | MTL + ML-DSA-44 (no ladder cache) | 300 x 5 | 1011.0 ± 0.3 KiB | 399 | 0.00 | 3.0 | 302.0 | 1.83 | 60.6 | 0 |
+| medium | MTL + ML-DSA-44 | 300 x 5 | 110.7 ± 0.4 KiB | 331 | 0.00 | 3.0 | 3.0 | 1.02 | 35.0 | 0 |
+| medium | MTL + ML-DSA-44 (no ladder cache) | 300 x 5 | 1000.4 ± 0.4 KiB | 331 | 0.00 | 3.0 | 302.0 | 1.78 | 49.2 | 0 |
+| small | MTL + ML-DSA-44 | 300 x 5 | 98.2 ± 0.3 KiB | 289 | 0.00 | 3.0 | 3.0 | 0.75 | 26.7 | 0 |
+| small | MTL + ML-DSA-44 (no ladder cache) | 300 x 5 | 950.3 ± 0.3 KiB | 289 | 0.00 | 3.0 | 302.0 | 1.55 | 40.3 | 0 |
 
 ![bytes](figures/dns_bytes.png)
 
@@ -85,15 +85,15 @@ Recursor values come from the PowerDNS Recursor statistics API (after a full cac
 
 | Run | Recursor cache entries (Δ) | Packet-cache entries (Δ) | Recursor RSS Δ (KiB) | Validator ladders | Validator ladder bytes | Validator key bytes |
 |---|---|---|---|---|---|---|
-| mldsa44_large | 307 | 602 | 172 | 0 | 0 | 4128 |
-| mldsa44_medium | 270 | 528 | 255 | 0 | 0 | 4128 |
-| mldsa44_small | 107 | 201 | 243 | 0 | 0 | 4128 |
-| mtl_large | 310 | 307 | 11 | 3 | 556 | 4128 |
-| mtl_large_nocache | 310 | 307 | 7 | 0 | 0 | 4128 |
-| mtl_medium | 273 | 270 | 17 | 3 | 588 | 4128 |
+| mldsa44_large | 307 | 602 | 141 | 0 | 0 | 4128 |
+| mldsa44_medium | 270 | 528 | 303 | 0 | 0 | 4128 |
+| mldsa44_small | 107 | 201 | 249 | 0 | 0 | 4128 |
+| mtl_large | 310 | 307 | 10 | 3 | 524 | 4128 |
+| mtl_large_nocache | 310 | 307 | 8 | 0 | 0 | 4128 |
+| mtl_medium | 273 | 270 | 17 | 3 | 556 | 4128 |
 | mtl_medium_nocache | 273 | 270 | 20 | 0 | 0 | 4128 |
-| mtl_small | 110 | 107 | 12 | 3 | 460 | 4128 |
-| mtl_small_nocache | 110 | 107 | 33 | 0 | 0 | 4128 |
+| mtl_small | 110 | 107 | 130 | 3 | 428 | 4128 |
+| mtl_small_nocache | 110 | 107 | 30 | 0 | 0 | 4128 |
 
 > RSS deltas are page-granular and include allocator behaviour; treat them as indicative. Signature-byte cache estimates are in Section 4.2.
 

@@ -1,0 +1,28 @@
+{
+  "elapsed_ms": 11.072,
+  "queries": 7,
+  "udp_queries": 7,
+  "tcp_fallbacks": 7,
+  "bytes_tx": 550,
+  "bytes_rx": 15020,
+  "ladder_fetches": 0,
+  "ladder_fetch_bytes": 0,
+  "ladder_cache_hits": 0,
+  "mldsa_verifies": 4,
+  "ecdsa_verifies": 3,
+  "mtl_path_verifies": 0,
+  "rrsets_validated": 4,
+  "t_mldsa": 0.0002376489865127951,
+  "t_ecdsa": 0.0028074240108253434,
+  "t_mtl_path": 0.0,
+  "t_network": 0.006336491976981051,
+  "validator_ladders": 0,
+  "validator_ladder_bytes": 0,
+  "validator_key_bytes": 4128,
+  "timestamp": 1793036249,
+  "secure": true,
+  "qnames": [
+    "host00001.aiori3.test",
+    "www.aiori3.test"
+  ]
+}

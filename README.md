@@ -19,6 +19,7 @@ recursive resolver, and a separate client container.
 | `tools` | — | one-shot: signer, offline benchmarks, report |
 
 ---
+## [Team Introduction Video](https://youtu.be/YdQ5A0QAOkY?si=X7vbk1oMpD36uymW)
 
 ## ⚡ Universal Quickstart (Linux: Ubuntu / Debian / Kali) — Zero Compilation
 

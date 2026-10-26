@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>PQC-DNSSEC MTL Benchmark Testbed — RootOps (A3-PS036-TC023)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/vendor/xterm.css">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/vendor/xterm.css?v=2.5.2">
+  <link rel="stylesheet" href="/style.css?v=2.5.2">
 </head>
 <body>
   <!-- Initial Welcome / Intro Screen Overlay (First thing user sees on launch) -->
@@ -113,15 +116,17 @@
   <header class="app-titlebar">
     <div class="titlebar-left">
       <div class="project-branding">
-        <h1 class="project-title">PQC-DNSSEC MTL Benchmark Testbed</h1>
+        <h1 class="project-title">PQC-DNSSEC MTL Benchmark</h1>
         <span class="project-tag">PS-036 Evaluation</span>
       </div>
+
+      <!-- Dedicated Team Credentials -->
       <div class="team-meta">
-        <div class="meta-pill">
+        <div class="meta-pill" title="Evaluating Team Name">
           <span class="pill-label">Team:</span>
           <span class="pill-value">RootOps</span>
         </div>
-        <div class="meta-pill">
+        <div class="meta-pill" title="Unique Team ID">
           <span class="pill-label">Team ID:</span>
           <span class="pill-value">A3-PS036-TC023</span>
         </div>
@@ -132,15 +137,15 @@
     <div class="titlebar-center">
       <button id="intro-btn" class="theme-toggle-btn" onclick="openIntroScreen()" title="View Problem Statement, Solution Details, and Overview">
         <span>ℹ️</span>
-        <span>PS-036 Intro</span>
+        <span class="btn-label">PS-036 Intro</span>
       </button>
       <button id="fullscreen-toggle" class="theme-toggle-btn" onclick="toggleFullScreen()" title="Toggle Fullscreen Mode">
         <span id="fullscreen-icon">⛶</span>
-        <span id="fullscreen-text">Fullscreen</span>
+        <span id="fullscreen-text" class="btn-label">Fullscreen</span>
       </button>
       <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()" title="Switch between Light and Dark color themes">
         <span id="theme-icon">🌙</span>
-        <span id="theme-text">Dark Mode</span>
+        <span id="theme-text" class="btn-label">Dark Mode</span>
       </button>
     </div>
 
@@ -207,20 +212,22 @@
           <div class="section-block">
             <div class="section-title">CONTAINER DELEGATION CHAIN &amp; SERVICES</div>
             <div class="section-desc">Isolated lab network (172.30.53.0/24) running full DNSSEC hierarchy with PowerDNS.</div>
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Node</th>
-                  <th>IP Address</th>
-                  <th>Service Role</th>
-                  <th>State</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="topology-tbody">
-                <tr><td colspan="5" class="text-muted">Inspecting containers...</td></tr>
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Node</th>
+                    <th>IP Address</th>
+                    <th>Service Role</th>
+                    <th>State</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="topology-tbody">
+                  <tr><td colspan="5" class="text-muted">Inspecting containers...</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div class="section-block">
@@ -289,7 +296,36 @@
 
               <div class="form-actions">
                 <button type="submit" class="btn btn-primary" title="Sign all zones (., lab., aiori3.test.) with chosen algorithm and reload">Sign Hierarchy &amp; Reload</button>
-                <button type="button" class="btn btn-secondary" onclick="sendCmd('./tb.sh test')" title="Test DNSSEC chain validation from client to root">Verify Chain (tb.sh test)</button>
+                <button type="button" class="btn btn-secondary" onclick="triggerVerifyChain()" title="Test DNSSEC chain validation from client to root">Verify Chain (tb.sh test)</button>
+              </div>
+
+              <!-- Dynamic Zone Signing Results & Visual Comparison Area (Appears on Signing) -->
+              <div id="signing-results-panel" class="signing-results-panel" style="display: none;">
+                <div class="signing-results-header">
+                  <div class="section-title">📊 ZONE SIGNING TELEMETRY &amp; COMPARISON</div>
+                  <span id="signing-results-badge" class="badge-pill">READY</span>
+                </div>
+                
+                <div id="signing-results-table-box" class="table-responsive">
+                  <!-- Dynamically populated signing telemetry table -->
+                </div>
+
+                <!-- Visual Bar Graph Comparison -->
+                <div id="signing-comparison-charts" class="signing-charts-container">
+                  <!-- Dynamically populated comparison bar charts -->
+                </div>
+              </div>
+
+              <!-- Dynamic Trust Chain Verification Results Area (Appears on Verify Chain) -->
+              <div id="verify-results-panel" class="signing-results-panel" style="display: none; margin-top: 16px;">
+                <div class="signing-results-header">
+                  <div class="section-title">🛡️ TRUST CHAIN VERIFICATION TELEMETRY (tb.sh test)</div>
+                  <span id="verify-results-badge" class="badge-pill">READY</span>
+                </div>
+                
+                <div id="verify-results-table-box" class="table-responsive">
+                  <!-- Dynamically populated verification table -->
+                </div>
               </div>
             </form>
           </div>
@@ -303,7 +339,25 @@
               <label class="form-label">Add Host RRsets:</label>
               <input type="number" id="evolve-count" value="50" min="1" max="1000" class="input-text" style="width: 80px;">
               <button class="btn btn-secondary" onclick="triggerEvolve()" title="Add host records to zone and simulate ladder evolution">Evolve Series (tb.sh evolve)</button>
-              <button class="btn btn-secondary" onclick="sendCmd('./tb.sh demo-evolve')" title="Run automated demonstration of zone evolution and backward compatibility">Run Evolution Demo (tb.sh demo-evolve)</button>
+              <button class="btn btn-secondary" onclick="triggerDemoEvolve()" title="Run automated demonstration of zone evolution and backward compatibility">Run Evolution Demo (tb.sh demo-evolve)</button>
+            </div>
+
+            <!-- Dynamic Evolve Series Results Panel (Appears on Evolve Series) -->
+            <div id="evolve-results-panel" class="signing-results-panel" style="display: none; margin-top: 14px;">
+              <div class="signing-results-header">
+                <div class="section-title">🔄 ZONE EVOLUTION TELEMETRY (tb.sh evolve)</div>
+                <span id="evolve-results-badge" class="badge-pill">READY</span>
+              </div>
+              <div id="evolve-results-table-box" class="table-responsive"></div>
+            </div>
+
+            <!-- Dynamic Evolution Demo Results Panel (Appears on Run Evolution Demo) -->
+            <div id="demo-evolve-results-panel" class="signing-results-panel" style="display: none; margin-top: 14px;">
+              <div class="signing-results-header">
+                <div class="section-title">✨ BACKWARD COMPATIBILITY DEMO TELEMETRY (tb.sh demo-evolve)</div>
+                <span id="demo-evolve-results-badge" class="badge-pill">READY</span>
+              </div>
+              <div id="demo-evolve-results-table-box" class="table-responsive"></div>
             </div>
           </div>
 
@@ -394,6 +448,15 @@
               <input type="number" id="crypto-trials" value="5" min="1" max="20" class="input-text" style="width: 70px;">
               <button class="btn btn-primary" onclick="triggerBenchCrypto()" title="Run offline cryptographic benchmark for sign/verify times and signature sizes">Run Crypto Benchmark (tb.sh bench-crypto)</button>
             </div>
+
+            <!-- Dynamic Crypto Benchmark Results Panel (Appears on Run Crypto Benchmark) -->
+            <div id="crypto-results-panel" class="signing-results-panel" style="display: none; margin-top: 14px;">
+              <div class="signing-results-header">
+                <div class="section-title">⚡ CRYPTOGRAPHIC BENCHMARK TELEMETRY (tb.sh bench-crypto)</div>
+                <span id="crypto-results-badge" class="badge-pill">READY</span>
+              </div>
+              <div id="crypto-results-table-box" class="table-responsive"></div>
+            </div>
           </div>
 
           <div class="section-block">
@@ -409,6 +472,15 @@
               <label class="checkbox-label"><input type="checkbox" id="dns-nocache"> --no-ladder-cache</label>
               <button class="btn btn-primary" onclick="triggerBenchDns()" title="Run live DNS query benchmark against recursor measuring latency and TCP fallbacks">Run Live DNS (tb.sh bench-dns)</button>
             </div>
+
+            <!-- Dynamic Live DNS Benchmark Results Panel (Appears on Run Live DNS) -->
+            <div id="dns-results-panel" class="signing-results-panel" style="display: none; margin-top: 14px;">
+              <div class="signing-results-header">
+                <div class="section-title">🌐 LIVE DNS WORKLOAD TELEMETRY (tb.sh bench-dns)</div>
+                <span id="dns-results-badge" class="badge-pill">READY</span>
+              </div>
+              <div id="dns-results-table-box" class="table-responsive"></div>
+            </div>
           </div>
 
           <div class="section-block">
@@ -421,6 +493,15 @@
               <input type="number" id="endurance-runs" value="200" min="10" max="500" class="input-text" style="width: 80px;">
               <button class="btn btn-primary" onclick="triggerBenchEndurance()" title="Run randomized series expansions to measure ladder endurance K">Run Endurance (tb.sh bench-endurance)</button>
             </div>
+
+            <!-- Dynamic Endurance Benchmark Results Panel (Appears on Run Endurance) -->
+            <div id="endurance-results-panel" class="signing-results-panel" style="display: none; margin-top: 14px;">
+              <div class="signing-results-header">
+                <div class="section-title">📈 MERKLE LADDER ENDURANCE TELEMETRY (tb.sh bench-endurance)</div>
+                <span id="endurance-results-badge" class="badge-pill">READY</span>
+              </div>
+              <div id="endurance-results-table-box" class="table-responsive"></div>
+            </div>
           </div>
 
           <div class="section-block">
@@ -429,8 +510,17 @@
               Executes the full benchmark matrix (environment capture + crypto benchmarks + 3 sizes x 2 modes DNS benchmarks + endurance + report generation). Estimated duration: ~20-30 min.
             </div>
             <div class="btn-group">
-              <button class="btn btn-primary" onclick="sendCmd('./tb.sh bench-all')" title="Execute complete benchmark suite across all datasets and modes (~20-30 min)">Execute Full Suite (tb.sh bench-all)</button>
-              <button class="btn btn-secondary" onclick="sendCmd('./tb.sh report')" title="Re-parse raw benchmark results and generate REPORT.md and charts">Regenerate REPORT.md &amp; Figures</button>
+              <button class="btn btn-primary" onclick="triggerBenchAll()" title="Execute complete benchmark suite across all datasets and modes (~20-30 min)">Execute Full Suite (tb.sh bench-all)</button>
+              <button class="btn btn-secondary" onclick="triggerReportAndOpenViewer()" title="Re-parse raw benchmark results and open in Markdown Viewer">Regenerate REPORT.md &amp; Figures</button>
+            </div>
+
+            <!-- Dynamic Full Matrix Results Panel (Appears on Execute Full Suite) -->
+            <div id="benchall-results-panel" class="signing-results-panel" style="display: none; margin-top: 14px;">
+              <div class="signing-results-header">
+                <div class="section-title">🏆 COMPREHENSIVE BENCHMARK MATRIX (tb.sh bench-all)</div>
+                <span id="benchall-results-badge" class="badge-pill">READY</span>
+              </div>
+              <div id="benchall-results-table-box" class="table-responsive"></div>
             </div>
           </div>
         </div>
@@ -463,9 +553,9 @@
           </div>
 
           <div class="section-block">
-            <div class="section-title">RESULTS/REPORT.MD PREVIEW</div>
-            <button class="btn btn-secondary" onclick="toggleReportMarkdown()" title="Show or hide raw markdown content of results/REPORT.md">Toggle Raw Report Markdown</button>
-            <pre id="report-md-pre" class="code-box" style="display: none; margin-top: 10px; max-height: 400px; overflow-y: auto;"></pre>
+            <div class="section-title">BENCHMARK REPORT VIEWER</div>
+            <div class="section-desc">View the full benchmark report (REPORT.md) in a clean GitHub-style formatted reader without scrolling down.</div>
+            <button class="btn btn-primary" onclick="openMarkdownViewer()" title="Open GitHub-style formatted viewer for results/REPORT.md">📄 View Benchmark Report (REPORT.md)</button>
           </div>
         </div>
 
@@ -494,7 +584,7 @@
                 <div class="contributor-role-tag student-tag">Student Member</div>
                 <div class="contributor-avatar">👨‍💻</div>
                 <div class="contributor-name">Archishman Das</div>
-                <div class="contributor-dept">Department of Computer Science &amp; Engineering</div>
+                <div class="contributor-dept">Department of Computer Science &amp; Engineering(AI &amp; ML)</div>
                 <div class="contributor-inst">Institute of Engineering &amp; Management (IEM), Kolkata</div>
                 <div class="contributor-details">PQC DNSSEC Architecture, Merkle Tree Ladder Implementation &amp; Benchmarking Framework</div>
               </div>
@@ -503,7 +593,7 @@
                 <div class="contributor-role-tag student-tag">Student Member</div>
                 <div class="contributor-avatar">👩‍💻</div>
                 <div class="contributor-name">Sampurnaa Nag</div>
-                <div class="contributor-dept">Department of Computer Science &amp; Engineering</div>
+                <div class="contributor-dept">Department of Computer Science &amp; Engineering(AI &amp; ML)</div>
                 <div class="contributor-inst">Institute of Engineering &amp; Management (IEM), Kolkata</div>
                 <div class="contributor-details">Cryptographic Evaluation, Validation Telemetry &amp; Empirical Data Analysis</div>
               </div>
@@ -513,7 +603,7 @@
                 <div class="contributor-role-tag faculty-tag">Faculty Member &amp; Mentor</div>
                 <div class="contributor-avatar">👨‍🏫</div>
                 <div class="contributor-name">Prof. (Dr.) Indrajit De</div>
-                <div class="contributor-dept">Professor, Department of Computer Science &amp; Engineering</div>
+                <div class="contributor-dept">Professor, Department of Computer Science &amp; Engineering(AI &amp; ML)</div>
                 <div class="contributor-inst">Institute of Engineering &amp; Management (IEM), Kolkata</div>
                 <div class="contributor-details">Research Mentorship, Theoretical Cryptography Guidance &amp; Architectural Oversight</div>
               </div>
@@ -529,7 +619,7 @@
                 </div>
                 <div class="affil-info">
                   <div class="affil-title">Institute of Engineering &amp; Management (IEM), Kolkata</div>
-                  <div class="affil-sub">Department of Computer Science &amp; Engineering</div>
+                  <div class="affil-sub">Department of Computer Science &amp; Engineering(AI &amp; ML)</div>
                 </div>
               </div>
               <div class="affiliation-card">
@@ -613,6 +703,11 @@
       </div>
     </section>
 
+    <!-- Draggable Vertical Resizer Gutter between Workbench and Terminal Panels -->
+    <div class="panel-resizer" id="panel-resizer" title="Drag horizontally to resize workbench and terminal panels">
+      <div class="resizer-handle"></div>
+    </div>
+
     <!-- Collapsed Terminal Expand Strip (visible when terminal is collapsed) -->
     <div class="terminal-expand-strip" id="terminal-expand-strip" style="display: none;">
       <button class="expand-term-btn" onclick="toggleTerminalCollapse()" title="Expand interactive terminal console to view live CLI output">
@@ -632,10 +727,10 @@
         <div class="terminal-controls">
           <span class="status-indicator" id="term-status">[READY]</span>
           <button class="term-btn term-btn-terminate" id="btn-terminate" onclick="terminateRunningProcess()" title="Immediately terminate currently running process (Kill / Ctrl+C)">⏹ Terminate</button>
-          <button class="term-btn" onclick="sendSigint()" title="Send SIGINT (Ctrl+C) to abort the running command">Interrupt (Ctrl+C)</button>
+          <button class="term-btn" onclick="sendSigint()" title="Send SIGINT (Ctrl+C) to abort the running command">Interrupt</button>
           <button class="term-btn" onclick="clearTerminal()" title="Clear all text from the terminal viewport">Clear</button>
           <button class="term-btn" onclick="copyTerminalText()" title="Copy all terminal output text to clipboard">Copy</button>
-          <button class="term-btn term-collapse-btn" onclick="toggleTerminalCollapse()" title="Collapse terminal panel to maximize workbench view">▶ Collapse</button>
+          <button class="term-btn term-collapse-btn" onclick="toggleTerminalCollapse()" title="Collapse terminal panel to the right to give full width to workbench">▶ Collapse</button>
         </div>
       </div>
 
@@ -653,7 +748,7 @@
         <button class="quick-btn" onclick="sendCmd('./tb.sh demo-evolve')" title="Run automated zone evolution demo">demo-evolve</button>
         <button class="quick-btn" onclick="sendCmd('./tb.sh bench-crypto 5')" title="Run offline crypto benchmark with 5 trials">bench-crypto</button>
         <button class="quick-btn" onclick="sendCmd('./tb.sh bench-dns 5 300')" title="Run live DNS workload benchmark with 5 trials and 300 queries">bench-dns</button>
-        <button class="quick-btn" onclick="sendCmd('./tb.sh report')" title="Regenerate benchmark report and plot images">report</button>
+        <button class="quick-btn" onclick="triggerReportAndOpenViewer()" title="Regenerate benchmark report and open GitHub-style Markdown Viewer">report</button>
       </div>
 
       <!-- xterm.js Terminal Viewport -->
@@ -670,16 +765,36 @@
 
   <!-- Bottom Telemetry & Specification Footer -->
   <footer class="app-footer">
-    <div class="footer-item"><span class="footer-label">HOST OS:</span> <span id="ft-os">Kali GNU/Linux Rolling (kernel 7.1.5)</span></div>
-    <div class="footer-item"><span class="footer-label">CPU:</span> <span id="ft-cpu">AMD Ryzen 5 3550H (4 cores)</span></div>
+    <div class="footer-item"><span class="footer-label">HOST OS:</span> <span id="ft-os">Parrot Security 7.4 (echo) (kernel 6.17.13)</span></div>
+    <div class="footer-item"><span class="footer-label">CPU:</span> <span id="ft-cpu">Intel Xeon E-2314 (4 cores)</span></div>
     <div class="footer-item"><span class="footer-label">POWERDNS:</span> <span>Auth 5.0.7 / Recursor 5.3.10</span></div>
     <div class="footer-item"><span class="footer-label">PQC STACK:</span> <span>liboqs 0.16.0 / ML-DSA-44 (Alg 200, 201)</span></div>
-    <div class="footer-item"><span class="footer-label">DOCKER:</span> <span id="ft-docker">28.5.2 / Compose 2.40.3</span></div>
+    <div class="footer-item"><span class="footer-label">DOCKER:</span> <span id="ft-docker">29.9.2 / Compose 5.6.1</span></div>
   </footer>
 
+  <!-- GitHub-Style Temporary Markdown Viewer Modal -->
+  <div id="md-viewer-modal" class="md-modal-backdrop" style="display: none;" onclick="handleModalBackdropClick(event)">
+    <div class="md-modal-box">
+      <div class="md-modal-header">
+        <div class="md-modal-title">
+          <span class="md-file-icon">📄</span>
+          <span class="md-file-name">REPORT.md</span>
+          <span class="md-file-path">results/REPORT.md</span>
+        </div>
+        <div class="md-modal-actions">
+          <button class="btn btn-secondary md-action-btn" onclick="copyReportMarkdown()" id="btn-copy-md" title="Copy raw Markdown text to clipboard">📋 Copy Markdown</button>
+          <button class="btn btn-secondary md-action-btn md-close-btn" onclick="closeMarkdownViewer()" title="Close viewer (Esc)">✕ Close</button>
+        </div>
+      </div>
+      <div class="md-modal-body markdown-body" id="md-viewer-body">
+        <!-- Rendered GitHub-style Markdown content -->
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
-  <script src="/vendor/xterm.min.js"></script>
-  <script src="/vendor/xterm-addon-fit.min.js"></script>
-  <script src="/app.js"></script>
+  <script src="/vendor/xterm.min.js?v=2.5.2"></script>
+  <script src="/vendor/xterm-addon-fit.min.js?v=2.5.2"></script>
+  <script src="/app.js?v=2.5.2"></script>
 </body>
 </html>

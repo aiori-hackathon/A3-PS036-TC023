@@ -3,11 +3,11 @@
     3
   ],
   "micro": {
-    "mldsa44_sign_us": 240.77405599973645,
-    "mldsa44_verify_us": 89.09814599974197,
-    "ecdsa_p256_sign_us": 82.83688800020172,
-    "ecdsa_p256_verify_us": 211.62341400031437,
-    "mtl_cshake128_node_hash_us": 24.551187599990953,
+    "mldsa44_sign_us": 58.47885200637393,
+    "mldsa44_verify_us": 19.770430022617802,
+    "ecdsa_p256_sign_us": 34.59417200065218,
+    "ecdsa_p256_verify_us": 99.39845398184843,
+    "mtl_cshake128_node_hash_us": 9.473056900606025,
     "iterations": 500
   },
   "runs": [
@@ -19,10 +19,10 @@
         {
           "trial": 0,
           "rrsets": 211,
-          "sign_s": 0.09102116999997634,
+          "sign_s": 0.024133660990628414,
           "underlying_signs": 211,
-          "verify_s": 0.03160802100001092,
-          "ladder_verify_s": 3.111399996669206e-05,
+          "verify_s": 0.00835034299234394,
+          "ladder_verify_s": 6.023998139426112e-06,
           "underlying_verifies": 211,
           "hash_ops_sign": {
             "leaf": 0,
@@ -39,10 +39,10 @@
         {
           "trial": 1,
           "rrsets": 211,
-          "sign_s": 0.08536343200012197,
+          "sign_s": 0.025166320003336295,
           "underlying_signs": 211,
-          "verify_s": 0.03135433500006002,
-          "ladder_verify_s": 2.5163999907817924e-05,
+          "verify_s": 0.007686431999900378,
+          "ladder_verify_s": 5.592999514192343e-06,
           "underlying_verifies": 211,
           "hash_ops_sign": {
             "leaf": 0,
@@ -59,10 +59,10 @@
         {
           "trial": 2,
           "rrsets": 211,
-          "sign_s": 0.08983785400005218,
+          "sign_s": 0.024484146997565404,
           "underlying_signs": 211,
-          "verify_s": 0.03249983900013831,
-          "ladder_verify_s": 2.7197999997952138e-05,
+          "verify_s": 0.007694656000239775,
+          "ladder_verify_s": 8.984003216028214e-06,
           "underlying_verifies": 211,
           "hash_ops_sign": {
             "leaf": 0,
@@ -79,10 +79,10 @@
         {
           "trial": 3,
           "rrsets": 211,
-          "sign_s": 0.09115361199997096,
+          "sign_s": 0.023555122999823652,
           "underlying_signs": 211,
-          "verify_s": 0.037400297999965915,
-          "ladder_verify_s": 2.483499997651961e-05,
+          "verify_s": 0.007452088000718504,
+          "ladder_verify_s": 6.139001925475895e-06,
           "underlying_verifies": 211,
           "hash_ops_sign": {
             "leaf": 0,
@@ -99,10 +99,10 @@
         {
           "trial": 4,
           "rrsets": 211,
-          "sign_s": 0.09389972799999668,
+          "sign_s": 0.024490640993462875,
           "underlying_signs": 211,
-          "verify_s": 0.032696843999929115,
-          "ladder_verify_s": 2.9891999929532176e-05,
+          "verify_s": 0.008171406996552832,
+          "ladder_verify_s": 1.846899976953864e-05,
           "underlying_verifies": 211,
           "hash_ops_sign": {
             "leaf": 0,
@@ -117,10 +117,10 @@
           "signed_ladder_bytes": 0
         }
       ],
-      "sign_s_mean": 0.09025515920002362,
-      "sign_s_stdev": 0.0031136799107043473,
-      "verify_s_mean": 0.03311186740002085,
-      "verify_s_stdev": 0.002464139521575766,
+      "sign_s_mean": 0.024365978396963327,
+      "sign_s_stdev": 0.0005876880806139101,
+      "verify_s_mean": 0.007870985197951087,
+      "verify_s_stdev": 0.0003743874606760558,
       "rrsets": 211,
       "sig_bytes_mean": 2420.0,
       "sig_bytes_total": 510620,
@@ -136,10 +136,10 @@
         {
           "trial": 0,
           "rrsets": 213,
-          "sign_s": 0.09226430500007154,
+          "sign_s": 0.027176299001439475,
           "underlying_signs": 1,
-          "verify_s": 0.06091735300014989,
-          "ladder_verify_s": 0.0004672930001561326,
+          "verify_s": 0.021454980000271462,
+          "ladder_verify_s": 0.00011742100468836725,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 213,
@@ -156,10 +156,10 @@
         {
           "trial": 1,
           "rrsets": 213,
-          "sign_s": 0.07175808300007702,
+          "sign_s": 0.026416650987812318,
           "underlying_signs": 1,
-          "verify_s": 0.07143602300016028,
-          "ladder_verify_s": 0.0003771870001401112,
+          "verify_s": 0.021915270001045428,
+          "ladder_verify_s": 9.779600077308714e-05,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 213,
@@ -176,10 +176,10 @@
         {
           "trial": 2,
           "rrsets": 213,
-          "sign_s": 0.07826749199989536,
+          "sign_s": 0.0240038840129273,
           "underlying_signs": 1,
-          "verify_s": 0.05906953900012013,
-          "ladder_verify_s": 0.00037123000015526486,
+          "verify_s": 0.02011011198919732,
+          "ladder_verify_s": 9.049799700733274e-05,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 213,
@@ -196,10 +196,10 @@
         {
           "trial": 3,
           "rrsets": 213,
-          "sign_s": 0.06655864800018207,
+          "sign_s": 0.024576201001764275,
           "underlying_signs": 1,
-          "verify_s": 0.055997960000013336,
-          "ladder_verify_s": 0.0003525239999362384,
+          "verify_s": 0.02003097700071521,
+          "ladder_verify_s": 0.00012181198690086603,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 213,
@@ -216,10 +216,10 @@
         {
           "trial": 4,
           "rrsets": 213,
-          "sign_s": 0.07625084999995124,
+          "sign_s": 0.02415413699054625,
           "underlying_signs": 1,
-          "verify_s": 0.06860113700008696,
-          "ladder_verify_s": 0.0004125360001125955,
+          "verify_s": 0.020194148004520684,
+          "ladder_verify_s": 0.00010004099749494344,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 213,
@@ -234,10 +234,10 @@
           "signed_ladder_bytes": 2620
         }
       ],
-      "sign_s_mean": 0.07701987560003545,
-      "sign_s_stdev": 0.009639298717339094,
-      "verify_s_mean": 0.06320440240010612,
-      "verify_s_stdev": 0.0065411165791114225,
+      "sign_s_mean": 0.025265434398897925,
+      "sign_s_stdev": 0.001438596290287353,
+      "verify_s_mean": 0.020741097399150022,
+      "verify_s_stdev": 0.0008789022805974411,
       "rrsets": 213,
       "sig_bytes_mean": 190.85915492957747,
       "sig_bytes_total": 40653,
@@ -253,10 +253,10 @@
         {
           "trial": 0,
           "rrsets": 2011,
-          "sign_s": 0.753383741999869,
+          "sign_s": 0.22566374999587424,
           "underlying_signs": 2011,
-          "verify_s": 0.20099408900000526,
-          "ladder_verify_s": 0.00020329399990259844,
+          "verify_s": 0.07052177700097673,
+          "ladder_verify_s": 6.534099520649761e-05,
           "underlying_verifies": 2011,
           "hash_ops_sign": {
             "leaf": 0,
@@ -273,10 +273,10 @@
         {
           "trial": 1,
           "rrsets": 2011,
-          "sign_s": 0.9194676699999036,
+          "sign_s": 0.24222938700404484,
           "underlying_signs": 2011,
-          "verify_s": 0.30074417399987396,
-          "ladder_verify_s": 0.0002751659999375988,
+          "verify_s": 0.07391350000398234,
+          "ladder_verify_s": 7.765600457787514e-05,
           "underlying_verifies": 2011,
           "hash_ops_sign": {
             "leaf": 0,
@@ -293,10 +293,10 @@
         {
           "trial": 2,
           "rrsets": 2011,
-          "sign_s": 0.8516598129999693,
+          "sign_s": 0.21580602800531778,
           "underlying_signs": 2011,
-          "verify_s": 0.29743094800005565,
-          "ladder_verify_s": 0.0002531459999772778,
+          "verify_s": 0.07309785000688862,
+          "ladder_verify_s": 7.305300096049905e-05,
           "underlying_verifies": 2011,
           "hash_ops_sign": {
             "leaf": 0,
@@ -313,10 +313,10 @@
         {
           "trial": 3,
           "rrsets": 2011,
-          "sign_s": 0.6538000809998721,
+          "sign_s": 0.22967003200028557,
           "underlying_signs": 2011,
-          "verify_s": 0.225368539000101,
-          "ladder_verify_s": 0.0003168140001434949,
+          "verify_s": 0.07062189499265514,
+          "ladder_verify_s": 5.627999780699611e-05,
           "underlying_verifies": 2011,
           "hash_ops_sign": {
             "leaf": 0,
@@ -333,10 +333,10 @@
         {
           "trial": 4,
           "rrsets": 2011,
-          "sign_s": 0.6010227029998987,
+          "sign_s": 0.21954751000157557,
           "underlying_signs": 2011,
-          "verify_s": 0.24991434599996865,
-          "ladder_verify_s": 0.00037594600007651024,
+          "verify_s": 0.07062531699193642,
+          "ladder_verify_s": 5.998399865347892e-05,
           "underlying_verifies": 2011,
           "hash_ops_sign": {
             "leaf": 0,
@@ -351,10 +351,10 @@
           "signed_ladder_bytes": 0
         }
       ],
-      "sign_s_mean": 0.7558668017999025,
-      "sign_s_stdev": 0.13261035129713433,
-      "verify_s_mean": 0.2548904192000009,
-      "verify_s_stdev": 0.0439129267525277,
+      "sign_s_mean": 0.2265833414014196,
+      "sign_s_stdev": 0.010257015376445234,
+      "verify_s_mean": 0.07175606779928785,
+      "verify_s_stdev": 0.0016235233543834108,
       "rrsets": 2011,
       "sig_bytes_mean": 2420.0,
       "sig_bytes_total": 4866620,
@@ -370,10 +370,10 @@
         {
           "trial": 0,
           "rrsets": 2013,
-          "sign_s": 0.5222170780000397,
+          "sign_s": 0.24795391100633424,
           "underlying_signs": 1,
-          "verify_s": 0.5182531729999482,
-          "ladder_verify_s": 0.0010249229999317322,
+          "verify_s": 0.24408396999933757,
+          "ladder_verify_s": 0.0002317300095455721,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 2013,
@@ -390,10 +390,10 @@
         {
           "trial": 1,
           "rrsets": 2013,
-          "sign_s": 0.5739067560000422,
+          "sign_s": 0.2692939169937745,
           "underlying_signs": 1,
-          "verify_s": 0.5098521659999733,
-          "ladder_verify_s": 0.0011615250000431843,
+          "verify_s": 0.24778055401111487,
+          "ladder_verify_s": 0.0002492930070729926,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 2013,
@@ -410,10 +410,10 @@
         {
           "trial": 2,
           "rrsets": 2013,
-          "sign_s": 0.4628395559998353,
+          "sign_s": 0.2347420269943541,
           "underlying_signs": 1,
-          "verify_s": 0.4899389849999807,
-          "ladder_verify_s": 0.0010944719999770314,
+          "verify_s": 0.2430249479948543,
+          "ladder_verify_s": 0.00024070699873846024,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 2013,
@@ -430,10 +430,10 @@
         {
           "trial": 3,
           "rrsets": 2013,
-          "sign_s": 0.46663034900007005,
+          "sign_s": 0.23328770999796689,
           "underlying_signs": 1,
-          "verify_s": 0.4924497770000471,
-          "ladder_verify_s": 0.001118785000016942,
+          "verify_s": 0.23817983400658704,
+          "ladder_verify_s": 0.00024409701291006058,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 2013,
@@ -450,10 +450,10 @@
         {
           "trial": 4,
           "rrsets": 2013,
-          "sign_s": 0.4615439230001357,
+          "sign_s": 0.2505988330085529,
           "underlying_signs": 1,
-          "verify_s": 1.1045117789999495,
-          "ladder_verify_s": 0.0010075390000565676,
+          "verify_s": 0.23971075000008568,
+          "ladder_verify_s": 0.00023924799461383373,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 2013,
@@ -468,10 +468,10 @@
           "signed_ladder_bytes": 2748
         }
       ],
-      "sign_s_mean": 0.4974275324000246,
-      "sign_s_stdev": 0.049739373875007195,
-      "verify_s_mean": 0.6230011759999797,
-      "verify_s_stdev": 0.2694329776829622,
+      "sign_s_mean": 0.24717527960019653,
+      "sign_s_stdev": 0.014568900651495102,
+      "verify_s_mean": 0.2425560112023959,
+      "verify_s_stdev": 0.0037781227322275742,
       "rrsets": 2013,
       "sig_bytes_mean": 223.59711872826628,
       "sig_bytes_total": 450101,
@@ -487,10 +487,10 @@
         {
           "trial": 0,
           "rrsets": 20011,
-          "sign_s": 14.472793392000085,
+          "sign_s": 2.2633754139969824,
           "underlying_signs": 20011,
-          "verify_s": 2.678659087000142,
-          "ladder_verify_s": 0.0059152470000753965,
+          "verify_s": 0.7035123240057146,
+          "ladder_verify_s": 0.0008871949976310134,
           "underlying_verifies": 20011,
           "hash_ops_sign": {
             "leaf": 0,
@@ -507,10 +507,10 @@
         {
           "trial": 1,
           "rrsets": 20011,
-          "sign_s": 6.296388844000148,
+          "sign_s": 2.3197444639954483,
           "underlying_signs": 20011,
-          "verify_s": 2.3977140890001465,
-          "ladder_verify_s": 0.006031659999962358,
+          "verify_s": 0.7286802180024097,
+          "ladder_verify_s": 0.0012506109924288467,
           "underlying_verifies": 20011,
           "hash_ops_sign": {
             "leaf": 0,
@@ -527,10 +527,10 @@
         {
           "trial": 2,
           "rrsets": 20011,
-          "sign_s": 14.31451975799996,
+          "sign_s": 2.2841829060052987,
           "underlying_signs": 20011,
-          "verify_s": 5.461715895999987,
-          "ladder_verify_s": 0.006680156999891551,
+          "verify_s": 0.7133930059935665,
+          "ladder_verify_s": 0.0012443399900803342,
           "underlying_verifies": 20011,
           "hash_ops_sign": {
             "leaf": 0,
@@ -547,10 +547,10 @@
         {
           "trial": 3,
           "rrsets": 20011,
-          "sign_s": 14.660027657,
+          "sign_s": 2.2936944649991347,
           "underlying_signs": 20011,
-          "verify_s": 2.6445151660000192,
-          "ladder_verify_s": 0.006899164000060409,
+          "verify_s": 0.710710014012875,
+          "ladder_verify_s": 0.001360104011837393,
           "underlying_verifies": 20011,
           "hash_ops_sign": {
             "leaf": 0,
@@ -567,10 +567,10 @@
         {
           "trial": 4,
           "rrsets": 20011,
-          "sign_s": 7.858094319999964,
+          "sign_s": 2.24721759899694,
           "underlying_signs": 20011,
-          "verify_s": 6.130728234000117,
-          "ladder_verify_s": 0.008948533000193493,
+          "verify_s": 0.7716359360056231,
+          "ladder_verify_s": 0.0018691130098886788,
           "underlying_verifies": 20011,
           "hash_ops_sign": {
             "leaf": 0,
@@ -585,10 +585,10 @@
           "signed_ladder_bytes": 0
         }
       ],
-      "sign_s_mean": 11.520364794200031,
-      "sign_s_stdev": 4.095234096890708,
-      "verify_s_mean": 3.862666494400082,
-      "verify_s_stdev": 1.784160502389175,
+      "sign_s_mean": 2.281642969598761,
+      "sign_s_stdev": 0.02793842972650784,
+      "verify_s_mean": 0.7255862996040378,
+      "verify_s_stdev": 0.027328474273870272,
       "rrsets": 20011,
       "sig_bytes_mean": 2420.0,
       "sig_bytes_total": 48426620,
@@ -604,10 +604,10 @@
         {
           "trial": 0,
           "rrsets": 20013,
-          "sign_s": 12.761191042000064,
+          "sign_s": 2.514094454993028,
           "underlying_signs": 1,
-          "verify_s": 11.21192993700015,
-          "ladder_verify_s": 0.011900749999995242,
+          "verify_s": 3.233854944992345,
+          "ladder_verify_s": 0.002188097991165705,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 20013,
@@ -624,10 +624,10 @@
         {
           "trial": 1,
           "rrsets": 20013,
-          "sign_s": 5.115852338999957,
+          "sign_s": 2.496385670005111,
           "underlying_signs": 1,
-          "verify_s": 10.962256018000062,
-          "ladder_verify_s": 0.01162627300004715,
+          "verify_s": 3.220018213003641,
+          "ladder_verify_s": 0.0020664890034822747,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 20013,
@@ -644,10 +644,10 @@
         {
           "trial": 2,
           "rrsets": 20013,
-          "sign_s": 5.597768033999955,
+          "sign_s": 2.5128471049974905,
           "underlying_signs": 1,
-          "verify_s": 6.809157114000072,
-          "ladder_verify_s": 0.011600862000022971,
+          "verify_s": 3.2035490770067554,
+          "ladder_verify_s": 0.0020659750007325783,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 20013,
@@ -664,10 +664,10 @@
         {
           "trial": 3,
           "rrsets": 20013,
-          "sign_s": 7.610417702999939,
+          "sign_s": 2.5439219319960102,
           "underlying_signs": 1,
-          "verify_s": 18.941158673000018,
-          "ladder_verify_s": 0.013715891999936503,
+          "verify_s": 3.25897341799282,
+          "ladder_verify_s": 0.0021994249982526526,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 20013,
@@ -684,10 +684,10 @@
         {
           "trial": 4,
           "rrsets": 20013,
-          "sign_s": 7.2155533290001586,
+          "sign_s": 2.496437727008015,
           "underlying_signs": 1,
-          "verify_s": 7.13582811099991,
-          "ladder_verify_s": 0.011598566999964532,
+          "verify_s": 3.270194268989144,
+          "ladder_verify_s": 0.0033598959998926148,
           "underlying_verifies": 1,
           "hash_ops_sign": {
             "leaf": 20013,
@@ -702,10 +702,10 @@
           "signed_ladder_bytes": 2716
         }
       ],
-      "sign_s_mean": 7.6601564894000145,
-      "sign_s_stdev": 3.039228075294781,
-      "verify_s_mean": 11.012065970600043,
-      "verify_s_stdev": 4.888829116485348,
+      "sign_s_mean": 2.512737377799931,
+      "sign_s_stdev": 0.019412541582181475,
+      "verify_s_mean": 3.237317984396941,
+      "verify_s_stdev": 0.02739261639255277,
       "rrsets": 20013,
       "sig_bytes_mean": 290.55219107580075,
       "sig_bytes_total": 5814821,

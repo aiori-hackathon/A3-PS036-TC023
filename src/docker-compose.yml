@@ -12,6 +12,7 @@ x-auth: &auth
   build: { context: docker/auth, args: { PDNS_AUTH_REPO: "${PDNS_AUTH_REPO:-auth-50}" } }
   image: pqcmtl/pdns-auth:${PDNS_AUTH_REPO:-auth-50}
   restart: unless-stopped
+  stop_grace_period: 2s
   cpuset: "${AUTH_CPUS:-1}"
   volumes: [ "${HOST_DIR:-.}/zones:/zones:ro" ]
 x-tools: &tools
@@ -41,6 +42,7 @@ services:
     image: pqcmtl/pdns-recursor:${PDNS_REC_REPO:-rec-53}
     hostname: resolver.lab
     restart: unless-stopped
+    stop_grace_period: 2s
     cpuset: "${RESOLVER_CPUS:-2}"
     volumes: [ "${HOST_DIR:-.}/config/lab-root.hints:/etc/powerdns/lab-root.hints:ro" ]
     depends_on: [ root, tld-lab, sld-aiori ]
@@ -86,7 +88,7 @@ services:
     container_name: pqcmtl-ui
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     volumes:
       - "${HOST_DIR:-.}/:/work"
       - "/var/run/docker.sock:/var/run/docker.sock"
