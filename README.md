@@ -1,8 +1,8 @@
 # PS-036 — PQC DNSSEC MTL Benchmark Using a Reference Implmentation
 
-## [Prototype Demonstration Video](https://youtu.be/9npAU-OEy-o?si=JerlH1UPr4bbECQp)
+## [Prototype Demonstration Video Link](https://youtu.be/9npAU-OEy-o?si=JerlH1UPr4bbECQp)
 
-## [Prototype Live Demo](http://202.54.170.197:8080/)
+## [Live Prototype Link](http://202.54.170.197:8080/)
 
 Benchmarks **ML-DSA-44** vs **MTL + ML-DSA-44** (Merkle Tree Ladder mode, Verisign Labs) for DNSSEC
 zone signing, on a full, containerised delegation chain: **root → test. → aiori3.test.**, a PowerDNS
